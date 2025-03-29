@@ -1,0 +1,65 @@
+{
+  "models_dir": "~/.llamascale/models",
+  "cache_dir": "~/.llamascale/cache",
+  "log_dir": "~/.llamascale/logs",
+  "mlx_config": {
+    "use_metal": true,
+    "quantization": "int4",
+    "max_batch_size": 2,
+    "max_tokens": 4096,
+    "context_len": 8192,
+    "cpu_offload": false,
+    "thread_count": 0
+  },
+  "cache_config": {
+    "memory_size": 2000,
+    "disk_path": "~/.llamascale/cache",
+    "redis_url": null,
+    "ttl": 300,
+    "semantic_threshold": 0.95
+  },
+  "mlx_models": [
+    "llama3-8b-instruct",
+    "mixtral-8x7b-instruct",
+    "phi3-mini-4k"
+  ],
+  "cuda_models": [],
+  "routing_weights": {
+    "latency": 0.7,
+    "cost": 0.2,
+    "reliability": 0.1
+  },
+  "enable_mlx": true,
+  "enable_cuda": false,
+  "api_port": 8000,
+  "api_host": "127.0.0.1",
+  "models": [
+    {
+      "name": "llama3-8b-instruct",
+      "type": "llm",
+      "params": "8B",
+      "max_seq_len": 8192,
+      "quantization": "int4",
+      "local_path": "~/.llamascale/models/llama3-8b-instruct",
+      "hf_repo": "meta-llama/Meta-Llama-3-8B-Instruct"
+    },
+    {
+      "name": "mixtral-8x7b-instruct",
+      "type": "llm",
+      "params": "8x7B",
+      "max_seq_len": 32768,
+      "quantization": "int4",
+      "local_path": "~/.llamascale/models/mixtral-8x7b-instruct",
+      "hf_repo": "mistralai/Mixtral-8x7B-Instruct-v0.1"
+    },
+    {
+      "name": "phi3-mini-4k",
+      "type": "llm",
+      "params": "3.8B",
+      "max_seq_len": 4096,
+      "quantization": "int4",
+      "local_path": "~/.llamascale/models/phi3-mini-4k",
+      "hf_repo": "microsoft/Phi-3-mini-4k-instruct"
+    }
+  ]
+} 

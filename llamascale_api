@@ -1,0 +1,53 @@
+#!/usr/bin/env python3
+"""
+LlamaScale API - Command-line launcher for the LLM API server
+"""
+
+import os
+import sys
+import argparse
+from typing import Dict, Any
+
+def main():
+    """Launch the LlamaScale API server"""
+    parser = argparse.ArgumentParser(description="LlamaScale API Server")
+    parser.add_argument("--v2", action="store_true", help="Start the v2 API with function calling and agent support")
+    parser.add_argument("--host", type=str, help="Host to bind to (overrides config)")
+    parser.add_argument("--port", type=int, help="Port to listen on (overrides config)")
+    parser.add_argument("--log-level", type=str, choices=["debug", "info", "warning", "error"], 
+                      help="Logging level")
+    parser.add_argument("--config", type=str, help="Path to config file")
+    
+    args = parser.parse_args()
+    
+    # Set environment variables from command-line args
+    if args.config:
+        os.environ["LLAMASCALE_CONFIG"] = args.config
+    
+    # Configure logging
+    import logging
+    log_level = args.log_level or "info"
+    logging.basicConfig(
+        level=getattr(logging, log_level.upper()),
+        format="%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+    )
+    
+    # Get launch options
+    launch_options = {}
+    if args.host:
+        launch_options["host"] = args.host
+    if args.port:
+        launch_options["port"] = args.port
+    
+    # Start appropriate server
+    if args.v2:
+        from llamascale.api.v2.server import start as start_v2
+        print("Starting LlamaScale API v2 with function calling and agent support...")
+        start_v2(**launch_options)
+    else:
+        from llamascale.api.v1.server import start as start_v1
+        print("Starting LlamaScale API v1...")
+        start_v1(**launch_options)
+
+if __name__ == "__main__":
+    main() 
