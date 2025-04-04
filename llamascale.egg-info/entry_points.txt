@@ -1,2 +1,0 @@
-[console_scripts]
-llamascale = llamascale.tools.cli.llamascale_cli:main

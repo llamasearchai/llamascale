@@ -9,14 +9,14 @@ with open("README.md", "r", encoding="utf-8") as fh:
     long_description = fh.read()
 
 setup(
-    name="llamascale",
+    name="llamascale-llamasearch",
     version="6.0.0",
-    author="LlamaScale Team",
-    author_email="info@llamascale.ai",
+    author="LlamaSearch AI",
+    author_email="nikjois@llamasearch.ai",
     description="Mac-Native Enterprise LLM Orchestration Platform",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/llamascale/llamascale",
+    url="https://llamasearch.ai",
     packages=find_packages(),
     classifiers=[
         "Programming Language :: Python :: 3",
@@ -86,4 +86,6 @@ setup(
             "llamascale_api=llamascale_api:main",
         ],
     },
+    package_dir={"": "src"},
+    packages=find_packages(where="src"),
 ) 
